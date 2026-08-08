@@ -1,7 +1,7 @@
 # group-project
 1. This is project of our group about car spare parts name "Spare parts hub"
 
-2. It composes the spare parts available and their prices.
+2. It compiles lists of available spare parts and their prices.
 
 3. The user sends the prompt about the spare parts we have and their price.
 
