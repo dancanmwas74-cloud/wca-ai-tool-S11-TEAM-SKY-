@@ -24,10 +24,10 @@ The main objective of this project is to make finding car spare parts faster, ea
   8. GitHub -Version control and project hosting
 
 # How to Run
-1.Install the required packages:
-2.pip install -r requirements.txt
-3.Run the application:
-4.streamlit run app.py
+1. Install the required packages
+2. pip install -r requirements.txt
+3. Run the application:
+4. streamlit run app.py
 
 # Disclaimer
 Users should verify important information before purchasing.
