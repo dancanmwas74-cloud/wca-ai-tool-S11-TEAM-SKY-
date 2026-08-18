@@ -1,7 +1,7 @@
 # group-project
 
-# Spare Parts Price & Availability AI
-An AI-powered application that helps users find car spare parts, prices, and availability using natural English language searches.
+# Spare Parts Hub
+Spare parts hub is an AI-powered application that helps users find car spare parts, prices, and availability using natural English language searches.
 
 # Objective
 The main objective of this project is to make finding car spare parts faster, easier, and more convenient by allowing users to search for parts and obtain price and availability information through a conversational AI assistant.
