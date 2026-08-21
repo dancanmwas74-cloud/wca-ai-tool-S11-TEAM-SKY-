@@ -29,7 +29,18 @@ The main objective of this project is to make finding car spare parts faster, ea
 
 ## How to Run
 
-### 1. Install the required packages
+1. Open the project in Visual Studio Code.
+2. Create a virtual environment: `python -m venv venv`
+3. Activate it: `venv\Scripts\Activate.ps1`
+4. Install dependencies: `pip install -r requirements.txt`
+5. Create `.env` and add: `OPENAI_API_KEY=your_api_key_here`
+6. Place `Global_Car_Spare_Parts_Catalogue_REBUILT (1).pdf` in the project folder.
+7. Run the app: `streamlit run app.py`
+8. Open `http://localhost:8501` in your browser.
 
-```bash
+##  Disclaimer
+
+The Spare Parts Hub may make mistakes. Users should verify vehicle compatibility, price, availability, and other important catalogue information before purchasing.
+
+
 pip install -r requirements.txt
