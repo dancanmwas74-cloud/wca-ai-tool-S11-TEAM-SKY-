@@ -40,7 +40,20 @@ The main objective of this project is to make finding car spare parts faster, ea
 
 ##  Disclaimer
 
-The Spare Parts Hub may make mistakes. Users should verify vehicle compatibility, price, availability, and other important catalogue information before purchasing.
+The Spare Parts Hub may make mistakes. Users should verify vehicle compatibility, price, availability, and other important catalogue information before purchasing. 
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 pip install -r requirements.txt
