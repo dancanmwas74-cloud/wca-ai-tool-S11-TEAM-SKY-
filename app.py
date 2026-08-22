@@ -1,3 +1,5 @@
+from dotenv import load_dotenv
+load_dotenv()
 import re
 import os
 import pandas as pd
@@ -6,7 +8,7 @@ from rapidfuzz import fuzz
 import streamlit as st
 from openai import OpenAI
 
-API_KEY = "sk-proj-v5ijybUd71mCzehF8lc76ro-cqFGmwzseh70rnjlFTLCxsLLQq_wDv8TY88P6snMTo7G6p cV9NT3BlbkFJgBCd_wUO1VaztrONSuD9jPtg48TaP268DXMPKNKzZng2YeRVrjSv8fjWsmY-Lo nQprKp7aKiUA"
+API_KEY = os.getenv("OPENAI_API_KEY")
 OPENAI_API_KEY = API_KEY
 client = OpenAI(api_key=OPENAI_API_KEY)
 
