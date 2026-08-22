@@ -13,7 +13,7 @@ OPENAI_API_KEY = API_KEY
 client = OpenAI(api_key=OPENAI_API_KEY)
 
 st.set_page_config(page_title="Spare Parts Hub", page_icon="🚗", layout="wide")
-PDF_PATH = r"D:\Coding\Python\wca-ai-tool-S11-TEAM-SKY-\Global_Car_Spare_Parts_Catalogue_REBUILT (1).pdf"
+PDF_PATH = r"C:\Users\duncan\project\Global_Car_Spare_Parts_Catalogue_REBUILT (1).pdf"
 
 RTCCO_INSTRUCTIONS = """You are a professional automotive spare-parts AI assistant.
 Always identify vehicle make, model, year, fuel type and requested spare part.
