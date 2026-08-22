@@ -1,0 +1,61 @@
+SPARE PARTS CATALOGUE
+
+Part Name: Oil Filter
+Vehicle Make: Toyota
+Vehicle Model: Corolla
+Fuel: Petrol
+Year Start: 2007
+Year End: 2007
+Price: KSh 600-4,000
+Stock: Yes
+Supplier: Spare Parts Supplier
+
+Part Name: Air Filter
+Vehicle Make: Toyota
+Vehicle Model: Corolla
+Fuel: Petrol
+Year Start: 2007
+Year End: 2007
+Price: KSh 700-5,000
+Stock: Yes
+Supplier: Spare Parts Supplier
+
+Part Name: Fuel Filter
+Vehicle Make: Toyota
+Vehicle Model: Corolla
+Fuel: Petrol
+Year Start: 2007
+Year End: 2007
+Price: KSh 800-3,500
+Stock: Yes
+Supplier: Spare Parts Supplier
+
+Part Name: Brake Pad
+Vehicle Make: Toyota
+Vehicle Model: Corolla
+Fuel: Petrol
+Year Start: 2007
+Year End: 2007
+Price: KSh 2,000-6,000
+Stock: Yes
+Supplier: Spare Parts Supplier
+
+Part Name: Oil Filter
+Vehicle Make: Nissan
+Vehicle Model: Note
+Fuel: Petrol
+Year Start: 2008
+Year End: 2012
+Price: KSh 700-3,500
+Stock: Yes
+Supplier: Spare Parts Supplier
+
+Part Name: Air Filter
+Vehicle Make: Mazda
+Vehicle Model: Demio
+Fuel: Petrol
+Year Start: 2007
+Year End: 2014
+Price: KSh 800-4,000
+Stock: Yes
+Supplier: Spare Parts Supplier

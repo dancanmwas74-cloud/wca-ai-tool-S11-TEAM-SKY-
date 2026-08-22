@@ -1,0 +1,28 @@
+{
+    "status": "success",
+    "message": "1 matching part(s) found.",
+    "query": "Do you have toyota corolla petrol oil filter",
+    "intent": {
+        "make": "Toyota",
+        "model": "Corolla",
+        "year": null,
+        "fuel": "Petrol",
+        "part_name": "Oil Filter"
+    },
+    "matches": [
+        {
+            "part_name": "Oil filter",
+            "vehicle_make": "Toyota",
+            "vehicle_model": "Corolla",
+            "fuel": "",
+            "year_start": "2007-13",
+            "year_end": "2007-13",
+            "price": "KSh 600-4,000",
+            "stock": null,
+            "availability": "is stock",
+            "supplier": "",
+            "search_match": 100.0
+        }
+    ],
+    "generated_at": "2026-08-22T11:09:24"
+}

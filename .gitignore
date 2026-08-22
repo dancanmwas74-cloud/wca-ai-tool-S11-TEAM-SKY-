@@ -1,1 +1,11 @@
+ HEAD
+.enve
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+venv/
+.venv/
 .env
+.pytest_cache/
+ 837dca22ae5e648f62e8004b5f0db5c9905f2a5b
