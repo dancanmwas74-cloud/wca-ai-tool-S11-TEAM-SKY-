@@ -13,7 +13,7 @@ OPENAI_API_KEY = API_KEY
 client = OpenAI(api_key=OPENAI_API_KEY)
 
 st.set_page_config(page_title="Spare Parts Hub", page_icon="🚗", layout="wide")
-PDF_PATH = r"C:\Users\duncan\Downloads\Global_Car_Spare_Parts_Catalogue_REBUILT (1).pdf"
+PDF_PATH = r"D:\Coding\Python\wca-ai-tool-S11-TEAM-SKY-\Global_Car_Spare_Parts_Catalogue_REBUILT (1).pdf"
 
 RTCCO_INSTRUCTIONS = """You are a professional automotive spare-parts AI assistant.
 Always identify vehicle make, model, year, fuel type and requested spare part.
@@ -181,36 +181,34 @@ def extract_inventory_from_pdf(pdf_path):
     records = []
     with pdfplumber.open(pdf_path) as pdf:
         for page_number, page in enumerate(pdf.pages, 1):
-            for table in page.extract_tables():
+            tables = page.extract_tables()
+            
+            if not tables or len(tables) == 0:
+                settings = {
+                    "vertical_strategy": "text", 
+                    "horizontal_strategy": "text",
+                    "snap_tolerance": 5
+                }
+                tables = page.extract_tables(table_settings=settings)
+            
+            if not tables: 
+                text_lines = page.extract_text(layout=True)
+                if text_lines:
+                    for line in text_lines.split("\n"):
+                        if not line.strip(): continue
+                        cells = [c.strip() for c in re.split(r'\s{2,}', line) if c.strip()]
+                        if len(cells) >= 3:
+                            process_row_data(cells, line, page_number, records)
+                continue
+
+            for table in tables:
                 if not table: continue
                 for row in table:
                     if not row: continue
                     cells = [clean_text(c) for c in row if clean_text(c)]
                     if not cells: continue
                     raw_text = clean_text(" ".join(cells))
-                    lower = raw_text.lower()
-                    if any(x in lower for x in ("part_id","start_year","year_start")): continue
-                    if "make" in lower and "model" in lower and "price" in lower: continue
-
-                    make, model, fuel, part = find_make(raw_text), find_model(raw_text), find_fuel(raw_text), find_part(raw_text)
-                    years = re.findall(r"\b(?:19|20)\d{2}\b", raw_text)
-                    year_start = int(years[0]) if years else None
-                    year_end = int(years[1]) if len(years) > 1 else year_start
-                    price, stock = extract_price(raw_text), extract_stock(raw_text)
-
-                    if part:
-                        part_name = part
-                    else:
-                        cleaned = re.sub(r"\b(?:19|20)\d{2}\b", "", raw_text)
-                        cleaned = re.sub(r"(?:KSh|KES|Sh|\$)\s*[\d,]+(?:\s*[-–]\s*[\d,]+)?\+?", "", cleaned, flags=re.I)
-                        part_name = clean_part_name(cleaned)
-
-                    part_id = cells[0] if re.search(r"[A-Za-z]", cells[0]) and len(cells[0]) <= 30 else ""
-                    supplier = ""
-                    pm = re.search(r"(?:KSh|KES|Sh|\$)\s*[\d,]+(?:\s*[-–]\s*[\d,]+)?\+?", raw_text, re.I)
-                    if pm: supplier = clean_text(raw_text[pm.end():])
-
-                    records.append({"page":page_number,"part_id":part_id,"make":make,"model":model,"fuel":fuel,"year_start":year_start,"year_end":year_end,"part_name":clean_part_name(part_name),"price":price,"stock":stock,"supplier":supplier,"raw_text":raw_text})
+                    process_row_data(cells, raw_text, page_number, records)
 
     df = pd.DataFrame(records)
     if df.empty: return df
@@ -223,6 +221,35 @@ def extract_inventory_from_pdf(pdf_path):
     df["year_end"] = pd.to_numeric(df["year_end"], errors="coerce")
     df["stock"] = pd.to_numeric(df["stock"], errors="coerce").fillna(0).astype(int)
     return df
+
+def process_row_data(cells, raw_text, page_number, records):
+    lower = raw_text.lower()
+    if any(x in lower for x in ("part_id","start_year","year_start")): return
+    if "make" in lower and "model" in lower and "price" in lower: return
+
+    make, model, fuel, part = find_make(raw_text), find_model(raw_text), find_fuel(raw_text), find_part(raw_text)
+    years = re.findall(r"\b(?:19|20)\d{2}\b", raw_text)
+    year_start = int(years[0]) if years else None
+    year_end = int(years[1]) if len(years) > 1 else year_start
+    price, stock = extract_price(raw_text), extract_stock(raw_text)
+
+    if part:
+        part_name = part
+    else:
+        cleaned = re.sub(r"\b(?:19|20)\d{2}\b", "", raw_text)
+        cleaned = re.sub(r"(?:KSh|KES|Sh|\$)\s*[\d,]+(?:\s*[-–]\s*[\d,]+)?\+?", "", cleaned, flags=re.I)
+        part_name = clean_part_name(cleaned)
+
+    part_id = cells[0] if re.search(r"[A-Za-z0-9]", cells[0]) and len(cells[0]) <= 30 else ""
+    supplier = ""
+    pm = re.search(r"(?:KSh|KES|Sh|\$)\s*[\d,]+(?:\s*[-–]\s*[\d,]+)?\+?", raw_text, re.I)
+    if pm: supplier = clean_text(raw_text[pm.end():])
+
+    records.append({
+        "page": page_number, "part_id": part_id, "make": make, "model": model, "fuel": fuel,
+        "year_start": year_start, "year_end": year_end, "part_name": clean_part_name(part_name),
+        "price": price, "stock": stock, "supplier": supplier, "raw_text": raw_text
+    })
 
 def search_inventory(query, df):
     parsed = get_ai_intent(query)
